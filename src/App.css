@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+.app {
+  padding:0;
+  margin:0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.adobo-background{
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-container {
+  background-color: black;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.gabinas-logo {
+  padding: 10px 30px;
+  width: 250px;
+  height: 120px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-area {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 40px;
+}
+
+.username-box {
+  margin-right: 10px;
+  width:15vw;
+}
+
+.password-box {
+  margin-right: 10px;
+  width:15vw;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(194, 23, 23);
+  padding: 10px;
+  box-sizing: border-box;
+
+}
+
+.nav-links {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+}
+
+.register-box {
   display: flex;
   flex-direction: column;
+  width: 30vw;
+  height: 40vh;
+  position: absolute;
+  right: 5%;
+  top: 40%;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  line-height: 25px;
+  background-color: rgba(212, 11, 11, 0.76);
+  border-style: groove;
+  border-color: rgb(255, 254, 254);
 }
 
-.App-link {
-  color: #61dafb;
+.input-box {
+  width: 200px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.auth-button {
+  width: 150px;
+  margin-top: 30px;
 }
