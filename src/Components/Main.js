@@ -67,7 +67,7 @@ class Main extends Component {
                 </div>
                 <div className="auth-button-section">
                     <div >
-                        <button className="auth-button" onClick={e => this.handleRegister(e)}> Register </button>
+                        <button className="auth-button" onClick={e => this.handleRegister(e)}> REGISTER </button>
                     </div>
                 </div>
             </div>

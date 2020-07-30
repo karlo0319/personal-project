@@ -79,14 +79,16 @@
   background-color: rgba(212, 11, 11, 0.76);
   border-style: groove;
   border-color: rgb(255, 254, 254);
+  line-height: 35px;
 }
 
 .input-box {
-  width: 200px;
+  width: 15vw;
+  height: 3vh;
 }
 
 .auth-button {
-  width: 150px;
+  width: 10vw;
   margin-top: 30px;
 }
 
@@ -126,10 +128,38 @@
   font-size: 25px;
   font-family: cursive;
   text-shadow: .5px .1px rgb(155, 155, 155);
+  cursor: pointer;
+}
+
+.product-name:hover {
+  color: azure;
 }
 
 .add-button {
   margin-right: 25px;
   font-weight: bold;
   font-size: 20px;
+}
+
+.item-details {
+  position: absolute;
+  top: 0%;
+  left: 120%;
+  width: 30vw;
+  height: 66vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  border-radius: 1.5%;
+  border-style: solid;
+  border-width: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+}
+
+.food-image {
+  height: 25vh;
+  width: 25vw;
+  border: none;
 }

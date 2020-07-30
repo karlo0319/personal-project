@@ -8,7 +8,7 @@ class Menu extends React.Component {
         super(props);
         this.state = {
             menuList: [],
-            productDetails: []
+            selectedProduct: []
         }
     }
 
@@ -18,26 +18,23 @@ class Menu extends React.Component {
             .catch(err => console.log(err))
     }
 
-    getItemById = (id) => {
-    console.log(id)
-    axios.get(`/api/menu/${id}`)
-    .then(res => {
-        // const {name, price, image} = res.data[0]
-        this.setState({product: res.data[0]})
-    }).catch(err => console.log(err))
-}
+    getItemById = (info) => {
+        this.setState({ selectedProduct: info })
+    }
 
 
     render() {
+        console.log(this.state)
         const mappedList = this.state.menuList.map(info => {
             return <MenuList getItemById={this.getItemById} key={info.name} info={info} />
         })
+
         return (
             <div className="menu-container">
                 <div className="menu-list">
-                    <h2 style= {{ textDecorationLine: 'underline', textAlign: 'center'}}> MENU </h2>
+                    <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> MENU </h2>
                     {mappedList}
-                    <ProductDisplay productDetails={this.productDetails}/>
+                    <ProductDisplay product={this.state.selectedProduct} />
                 </div>
 
             </div>
