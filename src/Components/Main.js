@@ -27,7 +27,7 @@ class Main extends Component {
         if (password) {
             axios.post('/api/auth/register',{username, email, password})
                 .then(res => {
-                    // this.props.updateUser(res.data)
+                    this.props.updateUser(res.data)
                     this.props.history.push('/dashboard')
                 })
                 .catch(err => console.log(err))

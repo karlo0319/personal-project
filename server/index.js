@@ -4,6 +4,7 @@ const session = require('express-session')
 const massive = require('massive')
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 const authCtrl = require('./controllers/authController')
+const menuCtrl = require('./controllers/menuController')
 const app = express();
 
 app.use(express.json());
@@ -30,6 +31,10 @@ massive({
 app.post('/api/auth/register', authCtrl.register);
 app.post('/api/auth/login', authCtrl.login);
 app.get('/api/logout', authCtrl.logout);
+
+//Menu Endpoints
+app.get('/api/menu', menuCtrl.getMenu);
+app.get('/api/menu/:id', menuCtrl.getItemById);
 
 
 app.listen(SERVER_PORT, () => console.log(`Server running in port ${SERVER_PORT}`));

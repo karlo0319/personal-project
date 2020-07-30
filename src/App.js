@@ -12,7 +12,7 @@ function App(props) {
     <div className="App">
       <Header/>
       <Nav/>
-      <img alt="adobo" className="adobo-background" src="https://simply-delicious-food.com/wp-content/uploads/2019/09/Easy-Chicken-Adobo-3-480x270.jpg"/>
+      {props.location.pathname === '/' || props.location.pathname === '/dashboard' ? <img alt="adobo" className="adobo-background" src="https://simply-delicious-food.com/wp-content/uploads/2019/09/Easy-Chicken-Adobo-3-480x270.jpg"/> : null}
       {routes}
     </div>
   );

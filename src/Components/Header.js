@@ -31,6 +31,7 @@ class Header extends React.Component {
 
 
     render() {
+        console.log(this.props)
         const { username, password } = this.state
         return (
             <div className='header-container'>
@@ -52,13 +53,20 @@ class Header extends React.Component {
                                 name='password'
                                 value={password}
                                 onChange={this.handleChange} />
-                            <button className="auth-button" onClick={e => this.handleLogin(e)}> Login </button>
+                            <button className="auth-button" onClick={e => this.handleLogin(e)}> LOGIN </button>
                         </div>
                     </div>)
                     : null}
+                {this.props.location.pathname !== '/' 
+                    ? 
+                    <h2 className="welcome"> Welcome {this.props.user.username} ! </h2>
+                    : 
+                    null}
             </div>
         )
     }
 }
 
-export default withRouter(connect(null, { updateUser })(Header));
+const mapStateToProps = reduxState => reduxState;
+
+export default withRouter(connect(mapStateToProps, { updateUser })(Header));

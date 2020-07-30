@@ -28,14 +28,27 @@
   margin-right: 40px;
 }
 
+.welcome {
+  color: white;
+  font-style: italic;
+  margin-right: 100px;
+}
+
 .username-box {
   margin-right: 10px;
+  height:3vh;
   width:15vw;
 }
 
 .password-box {
   margin-right: 10px;
   width:15vw;
+  height:3vh;
+}
+
+.auth-button {
+  height:3.5vh;
+  font-weight: bold;
 }
 
 .nav-container {
@@ -50,7 +63,7 @@
 .nav-links {
   text-decoration: none;
   color: white;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .register-box {
@@ -75,4 +88,48 @@
 .auth-button {
   width: 150px;
   margin-top: 30px;
+}
+
+.menu-container {
+  top:26%;
+  left: 2%;
+  width: 100vw;
+  height: 82vh;
+  background-image: url("https://st2.depositphotos.com/4546947/11425/i/950/depositphotos_114250902-stock-photo-abaca-rope-by-the-philippine.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.menu-list {
+  position: absolute;
+  top: 26%;
+  left: 2%;
+  width: 25vw;
+  height: 70vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  border-radius: 1.5%;
+  border-style: solid;
+  border-width: 3px;
+  justify-content: space-evenly;
+  align-items: left;
+  padding-left: 20px;
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-name {
+  font-weight: bolder;
+  font-size: 25px;
+  font-family: cursive;
+  text-shadow: .5px .1px rgb(155, 155, 155);
+}
+
+.add-button {
+  margin-right: 25px;
+  font-weight: bold;
+  font-size: 20px;
 }
