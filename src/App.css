@@ -94,17 +94,17 @@
 
 .menu-container {
   top:26%;
-  left: 2%;
   width: 100vw;
   height: 82vh;
   background-image: url("https://st2.depositphotos.com/4546947/11425/i/950/depositphotos_114250902-stock-photo-abaca-rope-by-the-philippine.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
 
 .menu-list {
   position: absolute;
-  top: 26%;
+  top: 5%;
   left: 2%;
   width: 25vw;
   height: 70vh;
@@ -163,3 +163,32 @@
   width: 25vw;
   border: none;
 }
+
+.cart-box {
+  position: absolute;
+  top: 0%;
+  left: 266%;
+  width: 25vw;
+  height: 70vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  border-radius: 1.5%;
+  border-style: solid;
+  border-width: 3px;
+  padding-left: 20px;
+}
+
+.cart-details {
+  display: table-row-group;
+  align-items: center;
+  font-weight: bold;
+  margin: 12px;
+  box-sizing: border-box;
+}
+
+.item-delete {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  font-weight: bolder;
+}
+
