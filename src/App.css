@@ -169,26 +169,44 @@
   top: 0%;
   left: 266%;
   width: 25vw;
-  height: 70vh;
+  height: 60vh;
   background-color: rgba(200, 25, 25, 0.822);
   border-radius: 1.5%;
   border-style: solid;
   border-width: 3px;
-  padding-left: 20px;
+  padding: 5px;
 }
 
 .cart-details {
-  display: table-row-group;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   font-weight: bold;
-  margin: 12px;
   box-sizing: border-box;
+  justify-content: center;
 }
 
-.item-delete {
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  font-weight: bolder;
+.item-name {
+  width: 20%;
+  padding-right: 4%;
+  font-size: 15px;
 }
 
+.item {
+  width: 8%;
+  padding-right: 5%;
+}
+
+.cart-total {
+  position: absolute;
+  top: 90%;
+  left: 266%;
+  width: 10vw;
+  height: 7vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  border-radius: 1.5%;
+  border-style: solid;
+  border-width: 3px;
+  justify-content: center;
+  display: flex;
+}

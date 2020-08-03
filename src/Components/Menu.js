@@ -20,84 +20,88 @@ class Menu extends React.Component {
             .catch(err => console.log(err))
     }
 
-    getItemById = (info) => {
+    getItemById = info => {
         this.setState({ selectedProduct: info })
     }
 
-    addItemToCart = (info) => {
+    addItemToCart = info => {
         let inCart = this.state.cart.find(item => info.food_id === item.food_id);
         console.log(inCart)
-        if(!inCart){
+        if (!inCart) {
             info.quantity = 0;
             info.subTotal = 0;
             console.log(info)
             this.setState({ cart: [...this.state.cart, info] })
-        } 
+        }
     }
 
     deleteItemCart = deletedItem => {
         let itemDelete = this.state.cart.filter(food => food.food_id !== deletedItem);
         console.log(itemDelete)
-            this.setState({ cart: itemDelete })
-        } 
+        this.setState({ cart: itemDelete })
+    }
 
 
     addQuantityOnClick = id => {
         let updatedCart = this.state.cart.map(item => {
-            if(item.food_id === id) {
+            if (item.food_id === id) {
                 item.quantity += 1;
                 item.subTotal = item.quantity * item.price
                 return item
             } else {
                 return item
             }
-        });             
-            this.setState({ cart: updatedCart })
-        }
+        });
+        this.setState({ cart: updatedCart })
+    }
 
     minusQuantityOnClick = id => {
         let subtractedCart = this.state.cart.map(item => {
-                if(item.food_id === id) {
-                    item.quantity -= 1;
-                    item.subTotal = item.quantity * item.price
-                    return item
-                } else {
-                    return item
-                }
-            });             
-                this.setState({ cart: subtractedCart })
+            if (item.food_id === id) {
+                item.quantity -= 1;
+                item.subTotal = item.quantity * item.price
+                return item
+            } else {
+                return item
             }
-
+        });
+        this.setState({ cart: subtractedCart })
+    }
 
     render() {
+        console.log(this.state.cart)
         const mappedList = this.state.menuList.map(info => {
             return <MenuList getItemById={this.getItemById} addItemToCart={this.addItemToCart} key={info.name} info={info} />
         })
 
         let mappedCart = this.state.cart.map(food => {
             return (
-                <Cart key={food.food_id} 
-                food={food} 
-                addQuantityOnClick={this.addQuantityOnClick} 
-                minusQuantityOnClick={this.minusQuantityOnClick}
-                deleteItemCart={this.deleteItemCart}/>
+                <Cart key={food.food_id}
+                    food={food}
+                    addQuantityOnClick={this.addQuantityOnClick}
+                    minusQuantityOnClick={this.minusQuantityOnClick}
+                    deleteItemCart={this.deleteItemCart} />
             )
         })
 
-
+        let totalAmount = this.state.cart.reduce(function(tot, sub) {
+            return tot + sub.subTotal 
+        },0);
 
         return (
-            // <div className='menu-area'>
-                <div className="menu-container">
-                    <div className="menu-list">
-                        <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> MENU </h2>
-                        {mappedList}
+            <div className="menu-container">
+                <div className="menu-list">
+                    <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> MENU </h2>
+                    {mappedList}
                     <div>
-                        <ProductDisplay product={this.state.selectedProduct}/>
+                        <ProductDisplay product={this.state.selectedProduct} />
                     </div>
-                    <div className='cart-box'>    
-                    <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> CART </h2>
+                    <div className='cart-box'>
+                        <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> CART </h2>
                         <h3>{mappedCart}</h3>
+                    </div>
+                    <div className="cart-total">
+                        <h2> TOTAL = ${totalAmount} </h2>
                     </div>
                 </div>
             </div>
