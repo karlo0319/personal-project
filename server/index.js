@@ -35,6 +35,7 @@ app.get('/api/logout', authCtrl.logout);
 //Menu Endpoints
 app.get('/api/menu', menuCtrl.getMenu);
 app.get('/api/menu/:id', menuCtrl.getItemById);
+app.post('/api/cart/:id', menuCtrl.getCartByUser);
 
 
 app.listen(SERVER_PORT, () => console.log(`Server running in port ${SERVER_PORT}`));

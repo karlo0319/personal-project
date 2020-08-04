@@ -16,5 +16,23 @@ module.exports = {
         db.get_item_id(id)
         .then(item => res.status(200).send(item))
         .catch(err => res.status(500).send(err))
+    },
+
+    
+    insertItem: async (req, res) => {
+        const db = req.app.get('db'),
+        const {foodItems} = req.body,
+        const {id} = req.session;
+        const [foodOrder] = db.create_food_order(id)
+        foodItems.forEach(item => {
+    
+            await db.insert_item(food_item.food_id)
+        });
+
+
+
     }
+
 }
+
+    
