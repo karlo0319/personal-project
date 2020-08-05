@@ -1,24 +1,29 @@
+const stripe = require("stripe")("sk_test_51HCbk0GbfOcJRAjdbdEVO1IPeR5NDoWqAKlHWAXii8JIL2iCsA5ARL7TcuQUWAprKS2T1JrGslS5Q2O5Uzfayuta00Q5oZEAsV")
+
 module.exports = {
     getMoney: async (req, res) => {
-        console.log("Request:", req.body)
+        // console.log("Request:", req.body)
 
         let error;
         let status;
-        try {
-            const { cart, token } = req.body;
+        let customer;
+        let charge;
 
-            const customer = await stripe.customers.create({
+        const { token, totalAmount } = req.body;
+        try {
+
+            customer = await stripe.customers.create({
                 email: token.email,
                 source: token.id
             });
 
-            const idempotency_key = uuid();
-            const charge = await stripe.charges.create(
+            charge = await stripe.charges.create(
                 {
-                    amount: cart.total * 100,
+                    amount: totalAmount*100,
                     currency: "usd",
                     customer: customer.id,
                     receipt_email: token.email,
+                    description: `Purchased the amount of ${totalAmount} from Gabina's Cuisine.`,
                     shipping: {
                         name: token.card.name,
                         address: {
@@ -30,9 +35,6 @@ module.exports = {
                         }
                     }
                 },
-                {
-                    idempotency_key
-                }
             );
             console.log("Charge:", { charge });
             status = "success";
@@ -40,5 +42,6 @@ module.exports = {
             console.error("Error:", error);
             status = "failure";
         }
+        res.json({ error, status });
     }
 }

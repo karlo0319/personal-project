@@ -24,16 +24,13 @@ class Main extends Component {
     handleRegister = () => {
         console.log(this.state)
         const { username, email, password } = this.state;
-        if (password) {
-            axios.post('/api/auth/register',{username, email, password})
-                .then(res => {
-                    this.props.updateUser(res.data)
-                    this.props.history.push('/dashboard')
-                })
-                .catch(err => console.log(err))
-        } else {
-            alert('Password do not match');
-        }
+        axios.post('/api/auth/register', { username, email, password })
+            .then(res => {
+                this.props.updateUser(res.data)
+                this.props.history.push('/dashboard')
+            })
+            .catch(err => console.log(err))
+        alert('Password do not match');
     }
 
     render() {
@@ -42,7 +39,7 @@ class Main extends Component {
             <div className="register-box">
                 <h2 className="Mew-user"> New user? </h2>
                 <div>
-                    <span> USERNAME: </span> <br/>
+                    <span> USERNAME: </span> <br />
                     <input className="input-box"
                         type='text'
                         name='username'
@@ -50,7 +47,7 @@ class Main extends Component {
                         onChange={e => this.handleChange(e)} />
                 </div>
                 <div>
-                    <span> E-MAIL: </span><br/>
+                    <span> E-MAIL: </span><br />
                     <input className="input-box"
                         type='text'
                         name='email'
@@ -58,7 +55,7 @@ class Main extends Component {
                         onChange={e => this.handleChange(e)} />
                 </div>
                 <div>
-                    <span> PASSWORD: </span><br/>
+                    <span> PASSWORD: </span><br />
                     <input className="input-box"
                         type='text'
                         name='password'

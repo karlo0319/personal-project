@@ -5,6 +5,7 @@ import Cart from '../Components/Cart';
 import axios from 'axios';
 import StripeCheckOut from 'react-stripe-checkout';
 import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 
@@ -14,7 +15,8 @@ class Menu extends React.Component {
         this.state = {
             menuList: [],
             selectedProduct: [],
-            cart: []
+            cart: [],
+            totalAmount: 0
         }
     }
 
@@ -35,14 +37,20 @@ class Menu extends React.Component {
             info.quantity = 0;
             info.subTotal = 0;
             console.log(info)
-            this.setState({ cart: [...this.state.cart, info] })
+            this.setState({ cart: [...this.state.cart, info] }, () => {
+                this.calculateTotalAmount();
+            })
         }
+
+        
     }
 
     deleteItemCart = deletedItem => {
         let itemDelete = this.state.cart.filter(food => food.food_id !== deletedItem);
         console.log(itemDelete)
-        this.setState({ cart: itemDelete })
+        this.setState({ cart: itemDelete }, () => {
+            this.calculateTotalAmount();
+        })
     }
 
 
@@ -50,34 +58,53 @@ class Menu extends React.Component {
         let updatedCart = this.state.cart.map(item => {
             if (item.food_id === id) {
                 item.quantity += 1;
-                item.subTotal = item.quantity * item.price
+                item.subTotal = item.quantity * item.price;
                 return item
             } else {
                 return item
             }
         });
-        this.setState({ cart: updatedCart })
+        this.setState({ cart: updatedCart }, () => {
+            this.calculateTotalAmount();
+        })
     }
 
     minusQuantityOnClick = id => {
         let subtractedCart = this.state.cart.map(item => {
             if (item.food_id === id && item.quantity > 0) {
                 item.quantity -= 1;
-                item.subTotal = item.quantity * item.price
+                item.subTotal = item.quantity * item.price;
                 return item
             } else {
                 return item
             }
         });
-        this.setState({ cart: subtractedCart })
+        this.setState({ cart: subtractedCart }, () => {
+            this.calculateTotalAmount();
+        })
     }
 
-    handleToken = async (token, cart) => {
-        const response = await axios.post('/checkout', { token, cart });
+    calculateTotalAmount() {
+        let newTotalAmount = this.state.cart.reduce(function (tot, sub) {
+            return tot + sub.subTotal
+        }, 0);
+
+        this.setState({ totalAmount: newTotalAmount })
+    }
+
+    addCart = () => {
+        axios.post('/api/cart', {foodItems: this.state.cart});
+    }
+
+    handleToken = async (token) => {
+        const { totalAmount } = this.state
+        const response = await axios.post('/checkout', { token, totalAmount });
         const { status } = response.data
         if (status === 'success') {
             toast('Success! Check email for details',
                 { type: 'success' })
+                this.addCart()
+                this.setState({cart:[], totalAmount: 0})
         } else {
             toast('Something went wrong! Check email for details',
                 { type: 'error' })
@@ -86,6 +113,8 @@ class Menu extends React.Component {
 
     render() {
         console.log(this.state.cart)
+        const { totalAmount } = this.state;
+
         const mappedList = this.state.menuList.map(info => {
             return <MenuList getItemById={this.getItemById} addItemToCart={this.addItemToCart} key={info.name} info={info} />
         })
@@ -100,9 +129,7 @@ class Menu extends React.Component {
             )
         })
 
-        let totalAmount = this.state.cart.reduce(function (tot, sub) {
-            return tot + sub.subTotal
-        }, 0);
+        
 
         return (
             <div className="menu-container">
@@ -124,6 +151,8 @@ class Menu extends React.Component {
                             <StripeCheckOut
                                 stripeKey="pk_test_51HCbk0GbfOcJRAjdR4Uf0oittDSmezS2yJ6XytZLcFu6cqCvdVp7q1ECamvqoU6iddryMPD8zxKe0Yere4tdHg0j00ISbvnsMU"
                                 token={this.handleToken}
+                                billingAddress
+                                shippingAddress
                                 amount={totalAmount * 100}
                             />
                         </div>

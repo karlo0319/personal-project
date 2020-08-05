@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require("cors")
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
@@ -10,6 +11,7 @@ const checkoutCtrl = require('./controllers/checkoutController')
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use(session({
     resave: false,
@@ -37,9 +39,13 @@ app.get('/api/logout', authCtrl.logout);
 //Menu Endpoints
 app.get('/api/menu', menuCtrl.getMenu);
 app.get('/api/menu/:id', menuCtrl.getItemById);
-app.post('/api/cart/:id', menuCtrl.insertItem);
+app.post('/api/cart/', menuCtrl.insertItem);
 
 //Checkout
-app.post('/checkout', checkoutCtrl.getMoney)
+// app.get('/', (req,res) => {
+//     res.send(stripe)
+// })
+app.post('/checkout', checkoutCtrl.getMoney);
+
 
 app.listen(SERVER_PORT, () => console.log(`Server running in port ${SERVER_PORT}`));

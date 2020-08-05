@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateUser } from '../redux/reducer';
 import {withRouter} from 'react-router-dom';
 import {toast} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 
@@ -29,7 +30,7 @@ class Header extends React.Component {
                 this.props.updateUser(res.data);
                 this.props.history.push('/dashboard');
             })
-            .catch(err => toast('Could not log in'));
+            .catch(err => toast('Invalid Email or Password'));
     }
 
 

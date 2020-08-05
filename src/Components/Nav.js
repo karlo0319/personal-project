@@ -7,7 +7,7 @@ const Nav = props => {
         <div className='nav-container'>
             <Link to='/about'className='nav-links'>ABOUT US</Link>
             <Link to='/menu' className='nav-links'>MENU</Link>
-            <Link to='/location'className='nav-links'>LOCATION</Link>
+            <Link to='/history'className='nav-links'> ORDER HISTORY</Link>
             <Link to='/contact' className='nav-links'>CONTACT US</Link>
         </div>
     )
