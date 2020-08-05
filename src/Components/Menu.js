@@ -76,7 +76,7 @@ class Menu extends React.Component {
         const response = await axios.post('/checkout', { token, cart });
         const { status } = response.data
         if (status === 'success') {
-            toast('Success! Check emai for details',
+            toast('Success! Check email for details',
                 { type: 'success' })
         } else {
             toast('Something went wrong! Check email for details',
@@ -117,16 +117,16 @@ class Menu extends React.Component {
                         <h3>{mappedCart}</h3>
                     </div>
                     <div className="cart-total">
-                    <div className="cart-amount">
-                        <h2> TOTAL = ${totalAmount} </h2>
-                    </div>
-                    <div className='checkout-button'>
-                    <StripeCheckOut          
-                        stripkey="pk_test_51HCbk0GbfOcJRAjdR4Uf0oittDSmezS2yJ6XytZLcFu6cqCvdVp7q1ECamvqoU6iddryMPD8zxKe0Yere4tdHg0j00ISbvnsMU"
-                        token={this.handleToken}
-                        amount={totalAmount * 100}
-                    />
-                    </div>
+                        <div className="cart-amount">
+                            <h2> TOTAL = ${totalAmount} </h2>
+                        </div>
+                        <div className='checkout-button'>
+                            <StripeCheckOut
+                                stripeKey="pk_test_51HCbk0GbfOcJRAjdR4Uf0oittDSmezS2yJ6XytZLcFu6cqCvdVp7q1ECamvqoU6iddryMPD8zxKe0Yere4tdHg0j00ISbvnsMU"
+                                token={this.handleToken}
+                                amount={totalAmount * 100}
+                            />
+                        </div>
                     </div>
 
 
