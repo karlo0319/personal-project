@@ -3,8 +3,10 @@ const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
+const stripe = require("stripe")("sk_test_51HCbk0GbfOcJRAjdbdEVO1IPeR5NDoWqAKlHWAXii8JIL2iCsA5ARL7TcuQUWAprKS2T1JrGslS5Q2O5Uzfayuta00Q5oZEAsV")
 const authCtrl = require('./controllers/authController')
 const menuCtrl = require('./controllers/menuController')
+const checkoutCtrl = require('./controllers/checkoutController')
 const app = express();
 
 app.use(express.json());
@@ -35,7 +37,9 @@ app.get('/api/logout', authCtrl.logout);
 //Menu Endpoints
 app.get('/api/menu', menuCtrl.getMenu);
 app.get('/api/menu/:id', menuCtrl.getItemById);
-app.post('/api/cart/:id', menuCtrl.getCartByUser);
+app.post('/api/cart/:id', menuCtrl.insertItem);
 
+//Checkout
+app.post('/checkout', checkoutCtrl.getMoney)
 
 app.listen(SERVER_PORT, () => console.log(`Server running in port ${SERVER_PORT}`));

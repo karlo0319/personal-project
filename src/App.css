@@ -201,12 +201,19 @@
   position: absolute;
   top: 90%;
   left: 266%;
-  width: 10vw;
+  width: 26vw;
   height: 7vh;
   background-color: rgba(200, 25, 25, 0.822);
   border-radius: 1.5%;
   border-style: solid;
   border-width: 3px;
-  justify-content: center;
+  justify-content: space-between;
   display: flex;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.checkout-button {
+
 }

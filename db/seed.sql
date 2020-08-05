@@ -25,10 +25,3 @@ CREATE TABLE order_item (
     quantity INT,
     subtotal INT
 );
-
-Insert into food_order (user_id)
-values (1)
-returning *;
-
-Insert into order_item (food_id, food_order_id, quantity, subtotal)
-values (1, 1, 1, 1);    

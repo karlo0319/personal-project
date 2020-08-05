@@ -3,6 +3,9 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateUser } from '../redux/reducer';
 import {withRouter} from 'react-router-dom';
+import {toast} from 'react-toastify'
+
+toast.configure();
 
 
 class Header extends React.Component {
@@ -26,7 +29,7 @@ class Header extends React.Component {
                 this.props.updateUser(res.data);
                 this.props.history.push('/dashboard');
             })
-            .catch(err => alert('Could not log in'));
+            .catch(err => toast('Could not log in'));
     }
 
 
