@@ -39,12 +39,12 @@ app.get('/api/logout', authCtrl.logout);
 //Menu Endpoints
 app.get('/api/menu', menuCtrl.getMenu);
 app.get('/api/menu/:id', menuCtrl.getItemById);
+app.get('/history', menuCtrl.getOrderHistory)
 app.post('/api/cart/', menuCtrl.insertItem);
+app.delete('/deletecart/:id', menuCtrl.deleteCart);
+app.put('/updatecart/:id', menuCtrl.updateCart)
 
 //Checkout
-// app.get('/', (req,res) => {
-//     res.send(stripe)
-// })
 app.post('/checkout', checkoutCtrl.getMoney);
 
 

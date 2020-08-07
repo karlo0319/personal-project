@@ -10,7 +10,7 @@ class Cart extends React.Component {
                         <div className="item"><button onClick={() => minusQuantityOnClick(food.food_id)} > - </button></div>
                         <div className="item"><h3 > {food.quantity} </h3></div>
                         <div className="item"><button onClick={() => addQuantityOnClick(food.food_id)} > + </button></div>
-                        <div className="item"><h3> ${food.subTotal} </h3></div>
+                        <div className="item"><h3> ${food.subtotal} </h3></div>
                         <div className="item"><button onClick={() => deleteItemCart(food.food_id)}> DELETE </button></div>
             </div>
         )

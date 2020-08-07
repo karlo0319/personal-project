@@ -2,6 +2,8 @@ const initialState = {
     user: {
         username: '',
         email: '',
+        firstname: '',
+        lastname: '',
         password: '',
         userid: 0
     }

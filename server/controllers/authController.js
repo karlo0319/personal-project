@@ -15,6 +15,13 @@ module.exports = {
 
         const newUser = await db.register_user({username, email, password: hash});
         req.session.user = newUser[0];
+        req.session.user = {
+            id: user.user_id,
+            email: user.email,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            profilePicture: user.profile_picture
+        }
         res.status(201).send(req.session.user);
     },      
 

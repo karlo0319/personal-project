@@ -28,7 +28,7 @@ class Header extends React.Component {
         axios.post('/api/auth/login', { email, password })
             .then(res => {
                 this.props.updateUser(res.data);
-                this.props.history.push('/dashboard');
+                this.props.history.push('/about');
             })
             .catch(err => toast('Invalid Email or Password'));
     }

@@ -15,6 +15,7 @@ class Menu extends React.Component {
         this.state = {
             menuList: [],
             selectedProduct: [],
+            default: false,
             cart: [],
             totalAmount: 0
         }
@@ -27,7 +28,7 @@ class Menu extends React.Component {
     }
 
     getItemById = info => {
-        this.setState({ selectedProduct: info })
+        this.setState({ selectedProduct: info, default: true })
     }
 
     addItemToCart = info => {
@@ -35,14 +36,12 @@ class Menu extends React.Component {
         console.log(inCart)
         if (!inCart) {
             info.quantity = 0;
-            info.subTotal = 0;
+            info.subtotal = 0;
             console.log(info)
             this.setState({ cart: [...this.state.cart, info] }, () => {
                 this.calculateTotalAmount();
             })
         }
-
-        
     }
 
     deleteItemCart = deletedItem => {
@@ -58,7 +57,7 @@ class Menu extends React.Component {
         let updatedCart = this.state.cart.map(item => {
             if (item.food_id === id) {
                 item.quantity += 1;
-                item.subTotal = item.quantity * item.price;
+                item.subtotal = item.quantity * item.price;
                 return item
             } else {
                 return item
@@ -73,7 +72,7 @@ class Menu extends React.Component {
         let subtractedCart = this.state.cart.map(item => {
             if (item.food_id === id && item.quantity > 0) {
                 item.quantity -= 1;
-                item.subTotal = item.quantity * item.price;
+                item.subtotal = item.quantity * item.price;
                 return item
             } else {
                 return item
@@ -86,14 +85,16 @@ class Menu extends React.Component {
 
     calculateTotalAmount() {
         let newTotalAmount = this.state.cart.reduce(function (tot, sub) {
-            return tot + sub.subTotal
+            return tot + sub.subtotal
         }, 0);
 
         this.setState({ totalAmount: newTotalAmount })
     }
 
-    addCart = () => {
+    addCartonClick = () => {
         axios.post('/api/cart', {foodItems: this.state.cart});
+        this.setState({cart:[]})
+
     }
 
     handleToken = async (token) => {
@@ -102,26 +103,44 @@ class Menu extends React.Component {
         const { status } = response.data
         if (status === 'success') {
             toast('Success! Check email for details',
-                { type: 'success' })
-                this.addCart()
-                this.setState({cart:[], totalAmount: 0})
+            { type: 'success' })
+            // this.addCart()
+            // this.setState({cart:[], totalAmount: 0})
         } else {
             toast('Something went wrong! Check email for details',
                 { type: 'error' })
         }
     }
 
-    render() {
+    editCartonClick = () => {
         console.log(this.state.cart)
-        const { totalAmount } = this.state;
+        axios.get(`/history`)
+        .then(res => this.setState({cart:res.data}))
+        .catch(err => console.log(err))
+    }
 
+    deleteCartOnClick = (food_order_id) => {
+        axios.delete(`/deletecart/${food_order_id}`)
+        .then(() => this.editCartonClick(), this.setState({cart:[]}))
+        .catch(err => console.log(err))
+    }
+
+    updateCartOnClick = (food_order_id) => {
+        const {cart} = this.state
+        axios.put(`/updatecart/${food_order_id}`, {food_id: cart.food_id, food_order_id: cart.food_order_id, quantity: cart.quantity, subtotal: cart.subtotal})
+        .then(() => this.editCartonClick(), this.setState({cart:[]}))
+        .catch(err => console.log(err))
+    }
+
+    render() {
+        const { totalAmount } = this.state;
         const mappedList = this.state.menuList.map(info => {
             return <MenuList getItemById={this.getItemById} addItemToCart={this.addItemToCart} key={info.name} info={info} />
         })
 
         let mappedCart = this.state.cart.map(food => {
             return (
-                <Cart key={food.food_id}
+                <Cart key={food.name}
                     food={food}
                     addQuantityOnClick={this.addQuantityOnClick}
                     minusQuantityOnClick={this.minusQuantityOnClick}
@@ -129,6 +148,7 @@ class Menu extends React.Component {
             )
         })
 
+        // disable or enable clear button 
         
 
         return (
@@ -137,11 +157,19 @@ class Menu extends React.Component {
                     <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> MENU </h2>
                     {mappedList}
                     <div>
-                        <ProductDisplay product={this.state.selectedProduct} />
+                        <ProductDisplay default={this.state.default} product={this.state.selectedProduct} />
                     </div>
                     <div className='cart-box'>
                         <h2 style={{ textDecorationLine: 'underline', textAlign: 'center' }}> CART </h2>
                         <h3>{mappedCart}</h3>
+                    </div>
+                    <div>
+                        <button className='confirm-button' onClick={() => this.addCartonClick()}> CONFIRM </button>
+                    </div>
+                    <div className='cart-buttons'> 
+                        <button className='add-button' onClick={() => this.editCartonClick()}> EDIT </button>
+                        <button className='add-button' onClick={() => this.updateCartOnClick(this.state.cart[0].food_order_id)}> SAVE </button>
+                        <button disabled={this.state.cart.length === 0} className='add-button' onClick={() => this.deleteCartOnClick(this.state.cart[0].food_order_id)}> CLEAR </button>
                     </div>
                     <div className="cart-total">
                         <div className="cart-amount">
@@ -154,11 +182,10 @@ class Menu extends React.Component {
                                 billingAddress
                                 shippingAddress
                                 amount={totalAmount * 100}
+                                disabled={this.state.totalAmount === 0}
                             />
                         </div>
                     </div>
-
-
                 </div>
             </div>
         )

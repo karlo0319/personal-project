@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateUser } from '../redux/reducer';
-import './Dashboard';
 
 
 class Main extends Component {
@@ -27,7 +26,7 @@ class Main extends Component {
         axios.post('/api/auth/register', { username, email, password })
             .then(res => {
                 this.props.updateUser(res.data)
-                this.props.history.push('/dashboard')
+                this.props.history.push('/about')
             })
             .catch(err => console.log(err))
         alert('Password do not match');

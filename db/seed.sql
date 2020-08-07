@@ -2,7 +2,10 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50),
     password VARCHAR(250),
-    email VARCHAR
+    email VARCHAR,
+    firstName (50),
+    lastName VARCHAR(50),
+    profile_picture VARCHAR(50)
 );
 
 CREATE TABLE food_item (

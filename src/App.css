@@ -95,11 +95,37 @@
 .menu-container {
   top:26%;
   width: 100vw;
-  height: 82vh;
+  height: 85vh;
   background-image: url("https://st2.depositphotos.com/4546947/11425/i/950/depositphotos_114250902-stock-photo-abaca-rope-by-the-philippine.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+}
+.profile-container {
+  top:26%;
+  width: 100vw;
+  height: 83vh;
+  background-image: url("https://st2.depositphotos.com/4546947/11425/i/950/depositphotos_114250902-stock-photo-abaca-rope-by-the-philippine.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.post-box{
+  position: absolute;
+  top: 15%;
+  left:35%;
+  width: 25vw;
+  height: 60vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  border-radius: 1.5%;
+  border-style: solid;
+  border-width: 3px;
+  box-sizing: border-box;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .menu-list {
@@ -107,7 +133,7 @@
   top: 5%;
   left: 2%;
   width: 25vw;
-  height: 70vh;
+  height: 72vh;
   background-color: rgba(200, 25, 25, 0.822);
   border-radius: 1.5%;
   border-style: solid;
@@ -146,17 +172,26 @@
   top: 0%;
   left: 120%;
   width: 30vw;
-  height: 66vh;
+  height: 68vh;
   background-color: rgba(200, 25, 25, 0.822);
   border-radius: 1.5%;
   border-style: solid;
   border-width: 3px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   padding: 20px;
 }
+
+.item-details2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
 
 .food-image {
   height: 25vh;
@@ -167,14 +202,16 @@
 .cart-box {
   position: absolute;
   top: 0%;
-  left: 266%;
-  width: 25vw;
-  height: 60vh;
+  left: 260%;
+  width: 26vw;
+  height: 50vh;
   background-color: rgba(200, 25, 25, 0.822);
   border-radius: 1.5%;
   border-style: solid;
   border-width: 3px;
-  padding: 5px;
+  padding-right: 20px;
+  line-height: 15px;
+  box-sizing: border-box;
 }
 
 .cart-details {
@@ -199,8 +236,25 @@
 
 .cart-total {
   position: absolute;
-  top: 90%;
-  left: 266%;
+  top: 91%;
+  left: 260%;
+  width: 26vw;
+  height: 4vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  border-radius: 1.5%;
+  border-style: solid;
+  border-width: 3px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.cart-buttons {
+  position: absolute;
+  top: 80%;
+  left: 260%;
   width: 26vw;
   height: 7vh;
   background-color: rgba(200, 25, 25, 0.822);
@@ -214,3 +268,52 @@
   box-sizing: border-box;
 }
 
+
+.order-history {
+  width: 40vw;
+  height: 10vh;
+  background-color: rgba(200, 25, 25, 0.822);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  left: 30%;
+  top: 18vw;
+  box-sizing: border-box;
+}
+
+.confirm-button{
+  position: absolute;
+  margin-right: 25px;
+  font-weight: bold;
+  font-size: 20px;
+  top: 73%;
+  left: 260%;
+  width: 26vw;
+  background-color: red;
+  color: white;
+  padding: 5px;
+}
+
+.gabinas-food-image {
+
+  width: 30vw;
+  height: 70vh;
+  border-style: solid;
+  box-sizing: border-box;
+  margin: 4vw;
+}
+
+.gabinas-schedule {
+  position: absolute;
+  top: 10%;
+  left: 40%;
+  height: 57vh;
+  width: 40vw;
+  background-color: rgba(212, 11, 11, 0.76);
+  border-style: groove;
+  border-color: black;
+  color: white;
+  padding: 3%
+
+}
