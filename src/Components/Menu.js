@@ -121,7 +121,7 @@ class Menu extends React.Component {
 
     deleteCartOnClick = (food_order_id) => {
         axios.delete(`/deletecart/${food_order_id}`)
-        .then(() => this.editCartonClick(), this.setState({cart:[]}))
+        .then(() => this.editCartonClick(), this.setState({cart:[], totalAmount: 0}))
         .catch(err => console.log(err))
     }
 
@@ -168,7 +168,7 @@ class Menu extends React.Component {
                     </div>
                     <div className='cart-buttons'> 
                         <button className='add-button' onClick={() => this.editCartonClick()}> EDIT </button>
-                        <button className='add-button' onClick={() => this.updateCartOnClick(this.state.cart[0].food_order_id)}> SAVE </button>
+                        <button className='add-button' onClick={() => this.updateCartOnClick(this.state.cart[0].food_order_id)}> UPDATE </button>
                         <button disabled={this.state.cart.length === 0} className='add-button' onClick={() => this.deleteCartOnClick(this.state.cart[0].food_order_id)}> CLEAR </button>
                     </div>
                     <div className="cart-total">

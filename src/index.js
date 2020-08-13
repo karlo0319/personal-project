@@ -5,16 +5,15 @@ import store from './redux/store';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { HashRouter, BrowserRouter} from 'react-router-dom'
-const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
+import { HashRouter} from 'react-router-dom'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <HashRouter>
       <React.StrictMode>
         <App />
       </React.StrictMode>
-    </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );

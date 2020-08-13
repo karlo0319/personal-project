@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { clearUser } from '../redux/reducer';
+import { updateUser, clearUser } from '../redux/reducer';
 import axios from 'axios';
 
 
@@ -28,4 +28,4 @@ const Nav = props => {
 
 const mapStateToProps = reduxState => reduxState;
 
-export default withRouter(connect(mapStateToProps, { clearUser })(Nav));
+export default withRouter(connect(mapStateToProps, {updateUser, clearUser})(Nav));
